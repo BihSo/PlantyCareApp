@@ -177,11 +177,11 @@ public class ModelOne extends BaseActivity {
         },500);
         modelOneUserPlantImage2.postDelayed(()->{
             modelOneUserPlantImage2.setVisibility(View.VISIBLE);
-            modelOneUserPlantImage2.startAnimation(createSlideUpAnimation(1500));
+            modelOneUserPlantImage2.startAnimation(createSlideUpAnimation(500));
         },500);
         briefCard.postDelayed(() -> {
             briefCard.setVisibility(View.VISIBLE);
-            briefCard.startAnimation(createSlideUpAnimation(1500));
+            briefCard.startAnimation(createSlideUpAnimation(1000));
         }, 1000);
         stepsCard.postDelayed(() -> {
             stepsCard.setVisibility(View.VISIBLE);

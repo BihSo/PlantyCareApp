@@ -219,18 +219,20 @@ public class HomePage extends BaseActivity {
     }
 
     private void showDeleteAccountDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this , R.style.CustomAlertDialog);
-        builder.setCancelable(false);
-        builder.setTitle("Account Deleted");
-        builder.setMessage("Your account has been deleted from our system.\n\nIf this was a mistake, please contact support or create a new account.");
-        builder.setPositiveButton("OK", (dialog, which) -> {
-            Intent intent = new Intent(HomePage.this, Login.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-        });
-        builder.setIcon(R.drawable.warning);
-        builder.show();
+        if(!isFinishing() && !isDestroyed()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomAlertDialog);
+            builder.setCancelable(false);
+            builder.setTitle("Account Deleted");
+            builder.setMessage("Your account has been deleted from our system.\n\nIf this was a mistake, please contact support or create a new account.");
+            builder.setPositiveButton("OK", (dialog, which) -> {
+                Intent intent = new Intent(HomePage.this, Login.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            });
+            builder.setIcon(R.drawable.warning);
+            builder.show();
+        }
     }
 
     private Animation createSlideUpAnimation(int duration) {

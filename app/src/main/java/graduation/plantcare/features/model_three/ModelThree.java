@@ -81,10 +81,12 @@ public class ModelThree extends BaseActivity {
                 String input = charSequence.toString();
 
                 if (input.isEmpty()) {
+                    textInputLayout.setErrorEnabled(true);
                     textInputLayout.setError("Required!");
                     return;
                 }
                 if(input.equals("-")){
+                    textInputLayout.setErrorEnabled(true);
                     textInputLayout.setError("Invalid value!");
                     return;
                 }
@@ -115,8 +117,10 @@ public class ModelThree extends BaseActivity {
 
     private void validateRange(float value, int min, int max, TextInputLayout layout) {
         if (value < min || value > max) {
+            layout.setErrorEnabled(true);
             layout.setError("Invalid value! [" + min + " - " + max + "]");
         } else {
+            layout.setErrorEnabled(false);
             layout.setError(null);
         }
     }
@@ -155,9 +159,11 @@ public class ModelThree extends BaseActivity {
         boolean isValid = true;
         for (int i = 0; i < inputs.length; i++) {
             if (inputs[i].getText().toString().isEmpty()) {
+                layouts[i].setErrorEnabled(true);
                 layouts[i].setError("Required!");
                 isValid = false;
             } else {
+                layouts[i].setErrorEnabled(false);
                 layouts[i].setError(null);
             }
         }

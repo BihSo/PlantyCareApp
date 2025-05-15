@@ -206,22 +206,28 @@ public class Login extends BaseActivity {
         boolean isValid = true;
 
         if (emailInput.isEmpty()) {
+            emailField.setErrorEnabled(true);
             emailField.setError("Required!");
             isValid = false;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            emailField.setErrorEnabled(true);
             emailField.setError("Invalid email format!");
             isValid = false;
         } else {
             emailField.setError(null);
+            emailField.setErrorEnabled(false);
         }
 
         if (passwordInput.isEmpty()) {
+            passwordField.setErrorEnabled(true);
             passwordField.setError("Required!");
             isValid = false;
         } else if (passwordInput.length() < 6) {
+            passwordField.setErrorEnabled(true);
             passwordField.setError("Password must be at least 6 characters.");
             isValid = false;
         } else {
+            passwordField.setErrorEnabled(false);
             passwordField.setError(null);
         }
 

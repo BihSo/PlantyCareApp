@@ -177,7 +177,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline19"
         app:layout_constraintStart_toStartOf="@+id/guideline16"
@@ -217,14 +217,14 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_transparent_background"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="20dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
                             android:text="AgriCure"
-                            android:textColor="@color/black"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -234,6 +234,7 @@
                             android:layout_marginTop="10dp"
                             android:lineSpacingExtra="5dp"
                             android:maxLines="4"
+                            android:justificationMode="inter_word"
                             android:text="AgriCure identifies plant diseases from images and suggests effective treatments, helping farmers protect their crops and improve yield."
                             android:textAllCaps="false"
                             android:textColor="@color/black"
@@ -283,14 +284,14 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_transparent_background"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="20dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
                             android:text="PlantPick"
-                            android:textColor="@color/black"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -300,6 +301,7 @@
                             android:layout_marginTop="10dp"
                             android:lineSpacingExtra="5dp"
                             android:maxLines="4"
+                            android:justificationMode="inter_word"
                             android:text="PlantPick recommends the best crops to
 grow based on factors like soil nutrients,
 temperature, and other environmental
@@ -336,7 +338,7 @@ conditions."
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
-                    android:src="@drawable/ourback1" />
+                    android:src="@drawable/ourimage3" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -353,14 +355,14 @@ conditions."
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_transparent_background"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="20dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
                             android:text="FertiGuide"
-                            android:textColor="@color/black"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -370,6 +372,7 @@ conditions."
                             android:layout_marginTop="10dp"
                             android:lineSpacingExtra="5dp"
                             android:maxLines="4"
+                            android:justificationMode="inter_word"
                             android:text="FertiGuide suggests the most suitable
 fertilizers for plants and soil, ensuring
 optimal growth and healthy crops."

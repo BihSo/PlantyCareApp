@@ -62,21 +62,27 @@ public class ContactUs extends BaseActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.toString().isEmpty()) {
                     emailLayout.setHelperText(null);
+                    emailLayout.setErrorEnabled(true);
                     emailLayout.setError("Email mustn't be empty!");
                 } else if (!s.toString().contains("@")) {
                     emailLayout.setHelperText(null);
+                    emailLayout.setErrorEnabled(true);
                     emailLayout.setError("Email must contain '@'!");
                 } else if (!s.toString().contains(".")) {
                     emailLayout.setHelperText(null);
+                    emailLayout.setErrorEnabled(true);
                     emailLayout.setError("Email must contain a domain (e.g., .com, .net)!");
                 } else if (!(s.length() >= 6 && s.length() <= 50)) {
                     emailLayout.setHelperText(null);
+                    emailLayout.setErrorEnabled(true);
                     emailLayout.setError("Email length must be between 6 and 50 characters!");
                 } else if (Patterns.EMAIL_ADDRESS.matcher(s).matches()) {
                     emailLayout.setHelperText(null);
+                    emailLayout.setErrorEnabled(false);
                     emailLayout.setError(null);
                 } else {
                     emailLayout.setHelperText(null);
+                    emailLayout.setErrorEnabled(true);
                     emailLayout.setError("Invalid email format!");
                 }
             }
@@ -95,9 +101,11 @@ public class ContactUs extends BaseActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.toString().length() >= 3) {
                     fullNameLayout.setHelperText(null);
+                    fullNameLayout.setErrorEnabled(false);
                     fullNameLayout.setError(null);
                 } else {
                     fullNameLayout.setHelperText(null);
+                    fullNameLayout.setErrorEnabled(true);
                     fullNameLayout.setError("so short!");
                 }
             }
@@ -116,6 +124,7 @@ public class ContactUs extends BaseActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String msg = s.toString();
                 int lenRem = 300 - msg.length();
+                messageLayout.setErrorEnabled(true);
                 if (msg.isEmpty()) {
                     messageLayout.setError("Empty message!!");
                 } else if (msg.length() < 10) {
@@ -123,6 +132,7 @@ public class ContactUs extends BaseActivity {
                 } else if (lenRem < 0) {
                     messageLayout.setError(lenRem + "");
                 } else {
+                    messageLayout.setErrorEnabled(false);
                     messageLayout.setHelperText(lenRem + "");
                 }
             }
@@ -138,7 +148,6 @@ public class ContactUs extends BaseActivity {
         fullNameLayout = findViewById(R.id.contactFullNameField);
         messageLayout = findViewById(R.id.contactMessageField);
         messageLayout.setHelperText("300");
-        //--
         email = findViewById(R.id.contactEmailInput);
         fullName = findViewById(R.id.contactFullNameInput);
         message = findViewById(R.id.contactMessageInput);
@@ -155,50 +164,62 @@ public class ContactUs extends BaseActivity {
         String msg = message.getText().toString();
 
         if (fName.isEmpty()) {
+            fullNameLayout.setErrorEnabled(true);
             fullNameLayout.setError("Required!");
             isValid = false;
         }
         if (emailInput.isEmpty()) {
+            emailLayout.setErrorEnabled(true);
             emailLayout.setError("Required!");
             isValid = false;
         }
         if (msg.isEmpty()) {
+            messageLayout.setErrorEnabled(true);
             messageLayout.setError("Required!");
             isValid = false;
         }
 
         if (fName.length() < 3) {
+            fullNameLayout.setErrorEnabled(true);
             fullNameLayout.setError("so short!");
             isValid = false;
         }
 
         if (msg.length() < 10) {
+            messageLayout.setErrorEnabled(true);
             messageLayout.setError("so short!");
             isValid = false;
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            emailLayout.setErrorEnabled(true);
             emailLayout.setError("Invalid email format!");
             isValid = false;
         }
 
         if (!emailInput.contains("@")) {
+            emailLayout.setErrorEnabled(true);
             emailLayout.setError("Email must contain '@'!");
             isValid = false;
         }
         if (!emailInput.contains(".")) {
+            emailLayout.setErrorEnabled(true);
             emailLayout.setError("Email must contain a domain (e.g., .com, .net)!");
             isValid = false;
         }
 
         if (!(emailInput.length() >= 6 && emailInput.length() <= 50)) {
+            emailLayout.setErrorEnabled(true);
             emailLayout.setError("Email length must be between 6 and 50 characters!");
             isValid = false;
         }
         if (isValid) {
             fullNameLayout.setError(null);
+            fullNameLayout.setErrorEnabled(false);
             emailLayout.setError(null);
+            emailLayout.setErrorEnabled(false);
             messageLayout.setError(null);
+            messageLayout.setErrorEnabled(false);
         }
         return isValid;
     }

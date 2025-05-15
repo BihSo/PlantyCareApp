@@ -65,10 +65,12 @@ public class ModelTwo extends AppCompatActivity {
                 String input = charSequence.toString();
 
                 if (input.isEmpty()) {
+                    textInputLayout.setErrorEnabled(true);
                     textInputLayout.setError("Required!");
                     return;
                 }
                 if(input.equals("-")){
+                    textInputLayout.setErrorEnabled(true);
                     textInputLayout.setError("Invalid value!");
                     return;
                 }
@@ -102,8 +104,10 @@ public class ModelTwo extends AppCompatActivity {
 
     private void validateRange(float value, int min, int max, TextInputLayout layout) {
         if (value < min || value > max) {
+            layout.setErrorEnabled(true);
             layout.setError("Invalid value! [" + min + " - " + max + "]");
         } else {
+            layout.setErrorEnabled(false);
             layout.setError(null);
         }
     }
@@ -112,30 +116,37 @@ public class ModelTwo extends AppCompatActivity {
     private boolean isReadyToPredict() {
         boolean isValid = true;
         if (ratioOfNitrogen.getText().toString().isEmpty()) {
+            ratioOfNitrogenLayout.setErrorEnabled(true);
             ratioOfNitrogenLayout.setError("Required!");
             isValid = false;
         }
         if (ratioOfPhosphorus.getText().toString().isEmpty()) {
+            ratioOfPhosphorusLayout.setErrorEnabled(true);
             ratioOfPhosphorusLayout.setError("Required!");
             isValid = false;
         }
         if (ratioOfPotassium.getText().toString().isEmpty()) {
+            ratioOfPotassiumLayout.setErrorEnabled(true);
             ratioOfPotassiumLayout.setError("Required!");
             isValid = false;
         }
         if (temperature.getText().toString().isEmpty()) {
+            temperatureLayout.setErrorEnabled(true);
             temperatureLayout.setError("Required!");
             isValid = false;
         }
         if (humidity.getText().toString().isEmpty()) {
+            humidityLayout.setErrorEnabled(true);
             humidityLayout.setError("Required!");
             isValid = false;
         }
         if (pHValue.getText().toString().isEmpty()) {
+            pHValueLayout.setErrorEnabled(true);
             pHValueLayout.setError("Required!");
             isValid = false;
         }
         if (rainfall.getText().toString().isEmpty()) {
+            rainfallLayout.setErrorEnabled(true);
             rainfallLayout.setError("Required!");
             isValid = false;
         }
