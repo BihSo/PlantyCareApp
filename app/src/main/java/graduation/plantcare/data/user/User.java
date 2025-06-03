@@ -9,6 +9,33 @@ public class User {
     private String password;
     private boolean verified;
     private long timestamp;
+    private int modelOneScore;
+    private int modelTwoScore;
+    private int modelThreeScore;
+
+    public int getModelOneScore() {
+        return modelOneScore;
+    }
+
+    public void setModelOneScore(int modelOneScore) {
+        this.modelOneScore = modelOneScore;
+    }
+
+    public int getModelTwoScore() {
+        return modelTwoScore;
+    }
+
+    public void setModelTwoScore(int modelTwoScore) {
+        this.modelTwoScore = modelTwoScore;
+    }
+
+    public int getModelThreeScore() {
+        return modelThreeScore;
+    }
+
+    public void setModelThreeScore(int modelThreeScore) {
+        this.modelThreeScore = modelThreeScore;
+    }
 
     public void setProfileImageUrl(String profileImageUrl) {
     }

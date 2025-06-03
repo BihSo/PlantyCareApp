@@ -39,7 +39,9 @@ import graduation.plantcare.data.models.model1.ApiClient;
 import graduation.plantcare.data.models.model1.ApiService;
 import graduation.plantcare.data.models.model1.ImagePredictionResponse;
 import graduation.plantcare.utils.FirebaseAuthHelper;
+import graduation.plantcare.utils.FirebaseHelper;
 import graduation.plantcare.utils.FirebaseStorageHelper;
+import graduation.plantcare.utils.UserSessionHelper;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -58,8 +60,8 @@ public class ModelOne extends BaseActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.model_one_result);
-        initialize();
 
+        initialize();
         String imagePath = getIntent().getStringExtra("imagePath");
         retrieveModelOneData(imagePath);
     }
@@ -108,6 +110,9 @@ public class ModelOne extends BaseActivity {
                 Log.e("ModelOne", "API Error: " + response.body());
                 if (response.isSuccessful() && response.body() != null) {
                     handleApiSuccess(response.body(), imageFile);
+                    FirebaseHelper  firebaseHelper = new FirebaseHelper();
+                    firebaseHelper.increaseModelOneCount(UserSessionHelper.getInstance(ModelOne.this).getUser().getUID(), isSuccess -> {});
+                    UserSessionHelper.getInstance(ModelOne.this).increaseModelOneScore();
                 } else {
                     showFailureDialog();
                 }

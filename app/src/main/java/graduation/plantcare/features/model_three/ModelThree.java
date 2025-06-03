@@ -28,6 +28,9 @@ import java.io.IOException;
 import graduation.plantcare.R;
 import graduation.plantcare.base.BaseActivity;
 import graduation.plantcare.data.models.model3.*;
+import graduation.plantcare.utils.FirebaseAuthHelper;
+import graduation.plantcare.utils.FirebaseHelper;
+import graduation.plantcare.utils.UserSessionHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -202,7 +205,10 @@ public class ModelThree extends BaseActivity {
                 public void onResponse(Call<PredictionResponse> call, Response<PredictionResponse> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         String prediction = response.body().getPredictedFertilizer();
-
+                        FirebaseHelper firebaseHelper = new FirebaseHelper();
+                        firebaseHelper.increaseModelThreeCount(UserSessionHelper.getInstance(ModelThree.this).getUser().getUID(), v -> {
+                        });
+                        UserSessionHelper.getInstance(ModelThree.this).increaseModelThreeScore();
                         TextView textView = dialog.findViewById(R.id.modelTwoTextView);
                         textView.setText("The most suitable fertilizer is:\n" + prediction);
                         ProgressBar progressBar = dialog.findViewById(R.id.modelTwoResultProgressBar);

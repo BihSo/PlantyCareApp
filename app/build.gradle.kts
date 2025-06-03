@@ -14,7 +14,7 @@ android {
         minSdk = 29
         targetSdk = 35
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -47,7 +47,7 @@ android {
 dependencies {
     implementation(platform(libs.google.firebase.bom))
     implementation(libs.appcompat)
-    implementation(libs.material.v190)// تحقق من أحدث إصدار
+    implementation(libs.material.v190)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.material.v1110)
@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.core)
     implementation(libs.core.ktx)
+    implementation(libs.gifdecoder)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -62,7 +63,9 @@ dependencies {
     annotationProcessor(libs.compiler)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
-    implementation("nl.dionsegijn:konfetti-xml:2.0.2")
+    implementation(libs.konfetti.xml)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
     implementation(libs.firebase.auth)
     implementation(libs.android.mail)
     implementation(libs.android.activation)

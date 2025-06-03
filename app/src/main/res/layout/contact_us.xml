@@ -195,7 +195,6 @@
         android:id="@+id/setANewPass"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:ellipsize="marquee"
         android:gravity="center"
         android:letterSpacing="0.02"

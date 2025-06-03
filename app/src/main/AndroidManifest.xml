@@ -22,8 +22,8 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/planty_care"
-        android:roundIcon="@mipmap/planty_care"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/planty_care"
         android:theme="@style/Theme.graduation.plantcare"
         android:usesCleartextTraffic="true"
         tools:ignore="WrongManifestParent"
@@ -31,15 +31,15 @@
         <activity
             android:name=".features.model_three.ModelThree"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.graduation.plantcare"/>
+            android:theme="@style/Theme.graduation.plantcare"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".features.model_two.ModelTwo"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.graduation.plantcare"/>
+            android:theme="@style/Theme.graduation.plantcare"
+            android:windowSoftInputMode="adjustResize" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -53,15 +53,15 @@
 
         <activity
             android:name=".features.model_one.ModelOne"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.graduation.plantcare" />
         <activity
             android:name=".ui.profile.EditProfile"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.graduation.plantcare" />
+            android:theme="@style/Theme.graduation.plantcare"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.home.RateUs"
             android:exported="false"
@@ -77,7 +77,6 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.graduation.plantcare" />
-
         <activity
             android:name=".ui.splash.SkipScreen3"
             android:exported="false"
@@ -116,33 +115,32 @@
         <activity
             android:name=".ui.profile.ContactUs"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.graduation.plantcare" />
+            android:theme="@style/Theme.graduation.plantcare"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".utils.NoInternetConnection"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.graduation.plantcare" />
-
         <activity
             android:name=".ui.auth.ForgetPassword"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.graduation.plantcare" />
+            android:theme="@style/Theme.graduation.plantcare"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.auth.SignUp"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.graduation.plantcare" />
+            android:theme="@style/Theme.graduation.plantcare"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.auth.Login"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.graduation.plantcare" />
+            android:theme="@style/Theme.graduation.plantcare"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.splash.WelcomeScreen"
             android:exported="false"

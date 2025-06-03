@@ -11,7 +11,7 @@
     <!-- حدود خفيفة -->
     <stroke
         android:width="2dp"
-        android:color="#DDDDDD" />
+        android:color="#AAAA" />
 
     <!-- مسافة داخلية اختيارية -->
     <padding

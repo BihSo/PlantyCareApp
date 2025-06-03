@@ -14,4 +14,5 @@
     <color name="background">#262626</color>
     <color name="textPrimary">#FFFFFF</color>
     <color name="my_link_color_dark_theme">#81D4FA</color>
+    <color name="black_for_shadow">#55FFFFFF</color>
 </resources>

@@ -26,16 +26,19 @@ import java.util.Locale;
 
 import graduation.plantcare.features.model_one.ModelOne;
 import graduation.plantcare.R;
+import graduation.plantcare.fragments.HomeFragment;
 import graduation.plantcare.ui.home.HomePage;
 import graduation.plantcare.ui.home.HistoryItem;
 
 public class ScanResultAdapter extends RecyclerView.Adapter<ScanResultAdapter.ViewHolder> {
     private List<HistoryItem> scanResults;
     private final Context context;
+    private final OnScanResultChangedListener listener;
 
-    public ScanResultAdapter(Context context, List<HistoryItem> scanResults) {
+    public ScanResultAdapter(Context context, List<HistoryItem> scanResults, OnScanResultChangedListener listener) {
         this.context = context;
         this.scanResults = scanResults;
+        this.listener = listener;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -123,8 +126,8 @@ public class ScanResultAdapter extends RecyclerView.Adapter<ScanResultAdapter.Vi
                 .addOnSuccessListener(aVoid -> {
                     scanResults.remove(position);
                     notifyDataSetChanged();
-                    if (scanResults.isEmpty() && context instanceof HomePage) {
-                        ((HomePage) context).showEmptyView();
+                    if (scanResults.isEmpty() && listener != null) {
+                        listener.onScanResultsEmpty();
                     }
                     Toast.makeText(context, "Item deleted", Toast.LENGTH_SHORT).show();
                 })

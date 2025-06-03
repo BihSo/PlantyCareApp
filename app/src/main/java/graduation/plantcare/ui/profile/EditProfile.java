@@ -4,7 +4,6 @@ import static graduation.plantcare.ui.splash.SplashScreen.isInternetAvailable;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -42,17 +41,13 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import graduation.plantcare.base.BaseActivity;
 import graduation.plantcare.R;
+import graduation.plantcare.base.BaseActivity;
 import graduation.plantcare.data.user.User;
 import graduation.plantcare.ui.home.Settings;
 import graduation.plantcare.utils.FirebaseHelper;
@@ -242,14 +237,18 @@ public class EditProfile extends BaseActivity {
         });
     }
 
-    private void setTextListeners(TextInputEditText textInputEditText, TextInputLayout textInputLayout){
+    private void setTextListeners(TextInputEditText textInputEditText, TextInputLayout textInputLayout) {
         textInputEditText.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.toString().isEmpty()) {
                     textInputLayout.setErrorEnabled(true);
                     textInputLayout.setError("Required!");
-                } else if (s.toString().length() < 3){
+                } else if (s.toString().length() < 3) {
                     textInputLayout.setErrorEnabled(true);
                     textInputLayout.setError("Must be at least 3 characters!");
                 } else {
@@ -258,6 +257,7 @@ public class EditProfile extends BaseActivity {
                 }
 
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 isNameChanged = !firstName.getText().toString().equals(oldFirstName)
@@ -304,11 +304,10 @@ public class EditProfile extends BaseActivity {
         progressBar.setVisibility(View.VISIBLE);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseHelper firebaseHelper = new FirebaseHelper();
+        String currentFirstName = firstName.getText().toString();
+        String currentLastName = lastName.getText().toString();
 
         if (isNameChanged) {
-            String currentFirstName = firstName.getText().toString();
-            String currentLastName = lastName.getText().toString();
-
             Map<String, Object> map = new HashMap<>();
             map.put("firstName", currentFirstName);
             map.put("displayName", currentFirstName);
@@ -321,13 +320,11 @@ public class EditProfile extends BaseActivity {
         if (isImageChanged) {
             updateProfileImage();
         } else {
+            UserSessionHelper.getInstance(this).setName(currentFirstName, currentLastName);
             new Handler().postDelayed(() -> {
                 progressBar.setVisibility(View.INVISIBLE);
-                Intent intent = new Intent(this, Settings.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
                 finish();
-            }, 4000);
+            }, 1000);
         }
 
         new Handler().postDelayed(() -> {
@@ -382,8 +379,8 @@ public class EditProfile extends BaseActivity {
                 .addOnCompleteListener(task -> {
                     progressBar.setVisibility(View.INVISIBLE);
                     if (task.isSuccessful()) {
-                        UserSessionHelper.getInstance(EditProfile.this).saveUser(user, true);
-                        navigateToSettings();
+                        UserSessionHelper.getInstance(this).saveUser(user, true);
+                        finish();
                     } else {
                         Toast.makeText(EditProfile.this,
                                 "Profile update failed",
@@ -393,12 +390,6 @@ public class EditProfile extends BaseActivity {
                 });
     }
 
-    private void navigateToSettings() {
-        new Handler().postDelayed(() -> {
-            startActivity(new Intent(this, Settings.class));
-            finish();
-        }, 4000);
-    }
     @Override
     protected void onDestroy() {
         super.onDestroy();

@@ -39,9 +39,13 @@ public class UserSessionHelper {
         firebaseHelper.getUserById(user.getUid(), a -> {
             if (a != null) {
                 editor.putString("userId", user.getUid());
+                editor.putString("modelOneScore", a.get("modelOneScore").toString());
+                editor.putString("modelTwoScore", a.get("modelTwoScore").toString());
+                editor.putString("modelThreeScore", a.get("modelThreeScore").toString());
                 editor.putString("firstName", a.get("firstName").toString());
                 editor.putString("lastName", a.get("lastName").toString());
                 editor.putString("email", a.get("email").toString());
+                editor.putLong("createdAt", (Long) a.get("createdAt"));
                 if (user.getPhotoUrl() != null) {
                     editor.putString("profileImageUrl", a.get("photoUrl").toString());
                 }
@@ -69,14 +73,23 @@ public class UserSessionHelper {
                 sharedPreferences.getString("email", ""),
                 sharedPreferences.getString("password", ""),
                 sharedPreferences.getBoolean("verified", false),
-                sharedPreferences.getLong("timestamp", 0)
+                sharedPreferences.getLong("createdAt", 0)
         );
         user.setProfileImageUrl(sharedPreferences.getString("profileImageUrl", null));
+        user.setModelOneScore(Integer.parseInt(sharedPreferences.getString("modelOneScore", "0")));
+        user.setModelTwoScore(Integer.parseInt(sharedPreferences.getString("modelTwoScore", "0")));
+        user.setModelThreeScore(Integer.parseInt(sharedPreferences.getString("modelThreeScore", "0")));
         return user;
     }
 
     public void setRememberMe(boolean rememberMe) {
         editor.putBoolean(KEY_REMEMBER_ME, rememberMe);
+        editor.apply();
+    }
+
+    public void setName(String firstName, String lastName) {
+        editor.putString("firstName", firstName);
+        editor.putString("lastName", lastName);
         editor.apply();
     }
 
@@ -107,5 +120,23 @@ public class UserSessionHelper {
 
     public long getLastRatingTime() {
         return sharedPreferences.getLong(LAST_RATING_TIME, 0);
+    }
+
+    public void increaseModelOneScore() {
+        int score = Integer.parseInt(sharedPreferences.getString("modelOneScore", "0"));
+        editor.putString("modelOneScore", String.valueOf(score + 1));
+        editor.apply();
+    }
+
+    public void increaseModelTwoScore() {
+        int score = Integer.parseInt(sharedPreferences.getString("modelTwoScore", "0"));
+        editor.putString("modelTwoScore", String.valueOf(score + 1));
+        editor.apply();
+    }
+
+    public void increaseModelThreeScore() {
+        int score = Integer.parseInt(sharedPreferences.getString("modelThreeScore", "0"));
+        editor.putString("modelThreeScore", String.valueOf(score + 1));
+        editor.apply();
     }
 }

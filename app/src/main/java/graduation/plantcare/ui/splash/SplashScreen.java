@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -72,16 +74,18 @@ public class SplashScreen extends BaseActivity {
     }
 
     public static void isInternetAvailable(Context context, OnInternetCheckListener listener) {
+        Log.d("InternetCheck", "Checking internet...");
         new Thread(() -> {
             try {
                 InetAddress ipAddr = InetAddress.getByName("google.com");
                 boolean isConnected = !ipAddr.equals("");
-                ((Activity) context).runOnUiThread(() -> listener.onResult(isConnected));
+                new Handler(Looper.getMainLooper()).post(() -> listener.onResult(isConnected));
             } catch (Exception e) {
-                ((Activity) context).runOnUiThread(() -> listener.onResult(false));
+                new Handler(Looper.getMainLooper()).post(() -> listener.onResult(false));
             }
         }).start();
     }
+
 
     public interface OnInternetCheckListener {
         void onResult(boolean isConnected);

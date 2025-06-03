@@ -137,4 +137,99 @@ public class FirebaseHelper {
         void onError(String errorMessage);
     }
 
+    public void increaseModelOneCount(String userId, DataCallback<Boolean> callback) {
+        DatabaseReference userModelRef = usersRef.child(userId).child("modelOneScore");
+
+        userModelRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long currentValue = 0;
+                if (snapshot.exists()) {
+                    try {
+                        currentValue = snapshot.getValue(Long.class);
+                    } catch (Exception e) {
+                        Log.e(TAG, "فشل في تحويل القيمة: " + e.getMessage());
+                    }
+                }
+
+                long newValue = currentValue + 1;
+                userModelRef.setValue(newValue)
+                        .addOnSuccessListener(aVoid -> callback.onDataReceived(true))
+                        .addOnFailureListener(e -> {
+                            Log.e(TAG, "فشل في تحديث القيمة: " + e.getMessage());
+                            callback.onDataReceived(false);
+                        });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, "فشل في قراءة القيمة: " + error.getMessage());
+                callback.onDataReceived(false);
+            }
+        });
+    }
+
+    public void increaseModelTwoCount(String userId, DataCallback<Boolean> callback) {
+        DatabaseReference userModelRef = usersRef.child(userId).child("modelTwoScore");
+
+        userModelRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long currentValue = 0;
+                if (snapshot.exists()) {
+                    try {
+                        currentValue = snapshot.getValue(Long.class);
+                    } catch (Exception e) {
+                        Log.e(TAG, "فشل في تحويل القيمة: " + e.getMessage());
+                    }
+                }
+
+                long newValue = currentValue + 1;
+                userModelRef.setValue(newValue)
+                        .addOnSuccessListener(aVoid -> callback.onDataReceived(true))
+                        .addOnFailureListener(e -> {
+                            Log.e(TAG, "فشل في تحديث القيمة: " + e.getMessage());
+                            callback.onDataReceived(false);
+                        });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, "فشل في قراءة القيمة: " + error.getMessage());
+                callback.onDataReceived(false);
+            }
+        });
+    }
+
+    public void increaseModelThreeCount(String userId, DataCallback<Boolean> callback) {
+        DatabaseReference userModelRef = usersRef.child(userId).child("modelThreeScore");
+
+        userModelRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long currentValue = 0;
+                if (snapshot.exists()) {
+                    try {
+                        currentValue = snapshot.getValue(Long.class);
+                    } catch (Exception e) {
+                        Log.e(TAG, "فشل في تحويل القيمة: " + e.getMessage());
+                    }
+                }
+
+                long newValue = currentValue + 1;
+                userModelRef.setValue(newValue)
+                        .addOnSuccessListener(aVoid -> callback.onDataReceived(true))
+                        .addOnFailureListener(e -> {
+                            Log.e(TAG, "فشل في تحديث القيمة: " + e.getMessage());
+                            callback.onDataReceived(false);
+                        });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, "فشل في قراءة القيمة: " + error.getMessage());
+                callback.onDataReceived(false);
+            }
+        });
+    }
 }

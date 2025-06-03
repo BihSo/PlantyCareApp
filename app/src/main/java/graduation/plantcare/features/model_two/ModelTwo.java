@@ -22,6 +22,10 @@ import java.io.IOException;
 import java.util.Arrays;
 import graduation.plantcare.R;
 import graduation.plantcare.data.models.model2.*;
+import graduation.plantcare.features.model_three.ModelThree;
+import graduation.plantcare.utils.FirebaseAuthHelper;
+import graduation.plantcare.utils.FirebaseHelper;
+import graduation.plantcare.utils.UserSessionHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -199,11 +203,15 @@ public class ModelTwo extends AppCompatActivity {
             ApiService apiService = ApiClient.getApiService();
             Call<PredictionResponse> call = apiService.predict(request);
 
-            call.enqueue(new Callback<PredictionResponse>() {
+            call.enqueue(new Callback<>() {
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void onResponse(Call<PredictionResponse> call, Response<PredictionResponse> response) {
                     if (response.isSuccessful() && response.body() != null) {
+                        FirebaseHelper firebaseHelper = new FirebaseHelper();
+                        firebaseHelper.increaseModelTwoCount(UserSessionHelper.getInstance(ModelTwo.this).getUser().getUID(), v -> {
+                        });
+                        UserSessionHelper.getInstance(ModelTwo.this).increaseModelTwoScore();
 
                         String prediction = response.body().getPrediction().get(0);
                         String imageName = prediction.toLowerCase();
@@ -238,7 +246,7 @@ public class ModelTwo extends AppCompatActivity {
                 public void onFailure(Call<PredictionResponse> call, Throwable t) {
                     dialog.cancel();
                     Log.e("API_FAILURE", "Failed: " + t.getMessage());
-                    Toast.makeText(ModelTwo.this, "API_FAILURE" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ModelTwo.this, "API_FAILURE", Toast.LENGTH_SHORT).show();
                 }
             });
         }

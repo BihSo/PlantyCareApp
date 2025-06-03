@@ -90,8 +90,9 @@ public class FirebaseAuthHelper {
         userData.put("lastModified", System.currentTimeMillis());
         userData.put("lastPasswordUpdate", System.currentTimeMillis());
         userData.put("verified" , false);
-        Log.d(TAG, "User Data: " + userData.toString()); // تأكد من طباعة البيانات
-
+        userData.put("modelOneScore", 0);
+        userData.put("modelTwoScore", 0);
+        userData.put("modelThreeScore", 0);
         FirebaseHelper firebaseHelper = new FirebaseHelper();
         firebaseHelper.addUser(userData, success ->{});
     }

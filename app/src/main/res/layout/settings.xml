@@ -109,8 +109,6 @@
         android:padding="5dp"
         android:scaleType="centerCrop"
         android:src="@drawable/default_profile"
-        app:civ_border_color="#2E8B57"
-        app:civ_border_width="2dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline65"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@+id/guideline53"

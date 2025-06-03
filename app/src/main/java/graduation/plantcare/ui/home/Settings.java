@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -41,6 +42,24 @@ public class Settings extends BaseActivity {
     CircleImageView profileImage;
     Switch switchButton;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setDisplayName();
+        setPhoto();
+    }
+
+    private void setPhoto() {
+        Uri photoUrl = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl();
+        if (photoUrl != null) {
+            Glide.with(this)
+                    .load(photoUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.loading)
+                    .into(profileImage);
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +69,8 @@ public class Settings extends BaseActivity {
         displayName = findViewById(R.id.settingDisplayName);
         settingUserName = findViewById(R.id.settingUserName);
         switchButton = findViewById(R.id.darkModeSwitch);
+        profileImage = findViewById(R.id.settingProfileIcon);
+
         UserSessionHelper userSessionHelper = UserSessionHelper.getInstance(this);
         if (userSessionHelper.isDarkMode()) {
             switchButton.setChecked(true);
@@ -65,24 +86,19 @@ public class Settings extends BaseActivity {
             recreate();
             Toast.makeText(this,  "Success", Toast.LENGTH_SHORT).show();
         });
+
+        setDisplayName();
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void setDisplayName(){
+        UserSessionHelper userSessionHelper = UserSessionHelper.getInstance(this);
         User user = userSessionHelper.getUser();
         displayName.setText(user.getFirstName() + " " + user.getLastName());
-        settingUserName.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-        profileImage = findViewById(R.id.settingProfileIcon);
-        Uri photoUrl = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl();
-        if (photoUrl != null) {
-            Glide.with(this)
-                    .load(photoUrl)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .placeholder(R.drawable.loading)
-                    .error(R.drawable.no_internet)
-                    .into(profileImage);
-        }
+        settingUserName.setText(user.getEmail());
     }
 
     public void backButton(View view) {
-        Intent intent = new Intent(this, HomePage.class);
-        startActivity(intent);
         finish();
     }
 
