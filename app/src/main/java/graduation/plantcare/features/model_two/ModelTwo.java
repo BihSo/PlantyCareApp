@@ -134,7 +134,7 @@ public class ModelTwo extends AppCompatActivity {
             ratioOfPotassiumLayout.setError("Required!");
             isValid = false;
         }
-        if (temperature.getText().toString().isEmpty()) {
+        if (temperature.getText().toString().isEmpty() || temperature.getText().toString().equals("-")) {
             temperatureLayout.setErrorEnabled(true);
             temperatureLayout.setError("Required!");
             isValid = false;
@@ -230,6 +230,7 @@ public class ModelTwo extends AppCompatActivity {
                             imageView.setImageResource(R.drawable.check);
                         }
                         progressBar.setVisibility(View.GONE);
+                        clearFields();
                     } else {
                         try {
                             Log.e("API_ERROR", "Error: " + response.code() + " " + (response.errorBody()).string());
@@ -250,5 +251,39 @@ public class ModelTwo extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void clearFields() {
+        ratioOfNitrogen.setText("");
+        ratioOfPhosphorus.setText("");
+        ratioOfPotassium.setText("");
+        temperature.setText("");
+        humidity.setText("");
+        pHValue.setText("");
+        rainfall.setText("");
+
+        ratioOfNitrogen.setError(null);
+        ratioOfPhosphorus.setError(null);
+        ratioOfPotassium.setError(null);
+        temperature.setError(null);
+        humidity.setError(null);
+        pHValue.setError(null);
+        rainfall.setError(null);
+
+        ratioOfNitrogenLayout.setError(null);
+        ratioOfPhosphorusLayout.setError(null);
+        ratioOfPotassiumLayout.setError(null);
+        temperatureLayout.setError(null);
+        humidityLayout.setError(null);
+        pHValueLayout.setError(null);
+        rainfallLayout.setError(null);
+
+        ratioOfNitrogenLayout.setErrorEnabled(false);
+        ratioOfPhosphorusLayout.setErrorEnabled(false);
+        ratioOfPotassiumLayout.setErrorEnabled(false);
+        temperatureLayout.setErrorEnabled(false);
+        humidityLayout.setErrorEnabled(false);
+        pHValueLayout.setErrorEnabled(false);
+        rainfallLayout.setErrorEnabled(false);
     }
 }

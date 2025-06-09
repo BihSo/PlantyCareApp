@@ -232,4 +232,11 @@ public class FirebaseHelper {
             }
         });
     }
+
+    public void deleteUser(String uid){
+        Log.d(TAG, "Trying to delete user with UID: " + uid);
+        usersRef.child(uid).removeValue();
+        supportEmails.child(uid).removeValue();
+        rateRef.child(uid).removeValue();
+    }
 }

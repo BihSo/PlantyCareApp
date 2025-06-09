@@ -7,6 +7,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
@@ -18,13 +21,14 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import graduation.plantcare.base.BaseActivity;
 import graduation.plantcare.R;
+import graduation.plantcare.base.BaseActivity;
 import graduation.plantcare.data.user.User;
 import graduation.plantcare.ui.auth.Login;
 import graduation.plantcare.ui.profile.AboutUs;
@@ -32,11 +36,12 @@ import graduation.plantcare.ui.profile.ContactUs;
 import graduation.plantcare.ui.profile.EditProfile;
 import graduation.plantcare.ui.profile.PrivacyPolicy;
 import graduation.plantcare.utils.FirebaseAuthHelper;
+import graduation.plantcare.utils.FirebaseHelper;
 import graduation.plantcare.utils.UserSessionHelper;
 
 public class Settings extends BaseActivity {
     private static final long RESEND_DELAY = 5 * 60 * 1000;
-    private long lastResendTime = RESEND_DELAY+1;
+    private long lastResendTime = RESEND_DELAY + 1;
     private long currentDelay = RESEND_DELAY;
     TextView displayName, settingUserName;
     CircleImageView profileImage;
@@ -84,14 +89,14 @@ public class Settings extends BaseActivity {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
             recreate();
-            Toast.makeText(this,  "Success", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
         });
 
         setDisplayName();
     }
 
     @SuppressLint("SetTextI18n")
-    public void setDisplayName(){
+    public void setDisplayName() {
         UserSessionHelper userSessionHelper = UserSessionHelper.getInstance(this);
         User user = userSessionHelper.getUser();
         displayName.setText(user.getFirstName() + " " + user.getLastName());
@@ -181,5 +186,73 @@ public class Settings extends BaseActivity {
 
     public void editProfileMethod(View view) {
         startActivity(new Intent(this, EditProfile.class));
+    }
+
+    public void deleteMyAccount(View view) {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.delete_account_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        Button startDeletion = dialog.findViewById(R.id.startDeletion);
+        MaterialButton cancelButton = dialog.findViewById(R.id.goBack);
+        TextInputLayout deleteAccountPasswordLayout = dialog.findViewById(R.id.deleteAccountPasswordLayout);
+        TextInputEditText deleteAccountPasswordInput = dialog.findViewById(R.id.deleteAccountPasswordInput);
+
+        deleteAccountPasswordInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.toString().isEmpty()) {
+                    deleteAccountPasswordLayout.setError("Password is required");
+                } else if (charSequence.toString().length() >= 6) {
+                    deleteAccountPasswordLayout.setError(null);
+                } else {
+                    deleteAccountPasswordLayout.setError("Password must be at least 6 characters");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        startDeletion.setOnClickListener(v -> {
+            if (deleteAccountPasswordInput.getText().toString().isEmpty()){
+                deleteAccountPasswordLayout.setError("Password is required");
+            } else if (deleteAccountPasswordLayout.getError() == null){
+                User user = UserSessionHelper.getInstance(this).getUser();
+                String uid = user.getUID();
+                String email = user.getEmail();
+                String password = deleteAccountPasswordInput.getText().toString();
+                FirebaseAuthHelper.getInstance().deleteEmail(email, password, new FirebaseAuthHelper.AuthCallbackWithoutInfo() {
+                    @Override
+                    public void onSuccess() {
+                        FirebaseHelper firebaseHelper = new FirebaseHelper();
+                        firebaseHelper.deleteUser(uid);
+                        UserSessionHelper.getInstance(Settings.this).clearUserData();
+                        Intent intent = new Intent(Settings.this, Login.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                        Toast.makeText(Settings.this, uid + " Account deleted successfully!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        deleteAccountPasswordLayout.setError("Invalid password!");
+                    }
+                });
+            }
+        });
+
+        cancelButton.setOnClickListener(v -> dialog.dismiss());
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 }

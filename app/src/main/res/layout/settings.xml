@@ -168,6 +168,8 @@
         android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:padding="15dp"
+        android:scrollbars="none"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/view4"
         app:layout_constraintStart_toStartOf="@+id/view4"
@@ -236,15 +238,6 @@
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
-                <ImageButton
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/right_arrow" />
             </LinearLayout>
 
             <View
@@ -532,10 +525,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="5dp"
-                android:text="Account Actions"
+                android:text="Dangerous Actions"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:text="Delete My Account"
+                android:onClick="deleteMyAccount"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:textSize="16sp"
+                tools:ignore="OnClick" />
 
             <LinearLayout
                 android:layout_width="match_parent"

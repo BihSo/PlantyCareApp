@@ -11,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import graduation.plantcare.R;
 import graduation.plantcare.base.BaseActivity;
+import graduation.plantcare.fragments.CalendarFragment;
 import graduation.plantcare.fragments.DictionaryFragment;
 import graduation.plantcare.fragments.HomeFragment;
 import graduation.plantcare.fragments.ProfileFragment;
@@ -33,12 +34,15 @@ public class HomePage extends BaseActivity {
         homeFragment = new HomeFragment();
         profileFragment = new ProfileFragment();
         dictionaryFragment = new DictionaryFragment();
+        calendarFragment = new CalendarFragment();
+
         activeFragment = homeFragment;
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fragment_container, profileFragment, "PROFILE").hide(profileFragment);
         transaction.add(R.id.fragment_container, homeFragment, "HOME");
+        transaction.add(R.id.fragment_container, profileFragment, "PROFILE").hide(profileFragment);
         transaction.add(R.id.fragment_container, dictionaryFragment, "DICTIONARY").hide(dictionaryFragment);
+        transaction.add(R.id.fragment_container, calendarFragment, "CALENDAR").hide(calendarFragment);
         transaction.commit();
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -54,10 +58,13 @@ public class HomePage extends BaseActivity {
             } else if (itemId == R.id.profileFragment) {
                 ft.show(profileFragment);
                 activeFragment = profileFragment;
-                activeFragment.onResume();
             } else if (itemId == R.id.dictionaryFragment) {
                 ft.show(dictionaryFragment);
                 activeFragment = dictionaryFragment;
+            } else if (itemId == R.id.calendarFragment) {
+                ft.show(calendarFragment);
+                activeFragment = calendarFragment;
+                ((CalendarFragment) calendarFragment).scheduleScrollWithRetry();
             }
             ft.commit();
             return true;

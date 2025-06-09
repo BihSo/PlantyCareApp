@@ -258,7 +258,7 @@
                         android:visibility="invisible"
                         android:layout_marginBottom="15dp"
                         android:backgroundTint="@color/colorAccent"
-                        app:cardCornerRadius="50dp"
+                        app:cardCornerRadius="25dp"
                         app:cardElevation="5dp">
 
                         <LinearLayout
@@ -380,7 +380,7 @@
                         android:visibility="invisible"
                         android:layout_marginBottom="16dp"
                         android:backgroundTint="@color/colorAccent"
-                        app:cardCornerRadius="50dp"
+                        app:cardCornerRadius="25dp"
                         app:cardElevation="5dp">
 
                         <LinearLayout
@@ -427,7 +427,7 @@
                                 android:maxLines="2"
                                 android:paddingStart="10dp"
                                 android:paddingEnd="10dp"
-                                android:text="Data Analyst - UI/UX"
+                                android:text="Data Analyst"
                                 android:textColor="@color/colorPrimary"
                                 android:textIsSelectable="true"
                                 android:textSize="16sp"
@@ -441,7 +441,7 @@
                                 android:fontFamily="sans-serif"
                                 android:justificationMode="inter_word"
                                 android:lineSpacingExtra="4dp"
-                                android:text="I handled UI/UX design, system analysis (ERD, class, and sequence diagrams), and developed dashboards and visualizations for all project models."
+                                android:text="I handled UI/UX design and developed dashboards and visualizations for all project models."
                                 android:textColor="@color/black"
                                 android:textIsSelectable="true"
                                 android:textSize="14sp" />
@@ -500,7 +500,7 @@
                         android:visibility="invisible"
                         android:layout_marginBottom="16dp"
                         android:backgroundTint="@color/colorAccent"
-                        app:cardCornerRadius="50dp"
+                        app:cardCornerRadius="25dp"
                         app:cardElevation="5dp">
 
                         <LinearLayout
@@ -561,7 +561,7 @@
                                 android:fontFamily="sans-serif"
                                 android:justificationMode="inter_word"
                                 android:lineSpacingExtra="4dp"
-                                android:text="Designed and trained AI models for plant disease detection and crop prediction; handled full data pipeline including collection, preprocessing, training, and evaluation."
+                                android:text="Trained AI models for plant disease detection and crop prediction. handled full data pipeline."
                                 android:textColor="@color/black"
                                 android:textIsSelectable="true"
                                 android:textSize="14sp" />
@@ -621,7 +621,7 @@
                         android:visibility="invisible"
                         android:layout_marginBottom="16dp"
                         android:backgroundTint="@color/colorAccent"
-                        app:cardCornerRadius="50dp"
+                        app:cardCornerRadius="25dp"
                         app:cardElevation="5dp">
 
                         <LinearLayout
@@ -678,7 +678,7 @@
                                 android:fontFamily="sans-serif"
                                 android:justificationMode="inter_word"
                                 android:lineSpacingExtra="4dp"
-                                android:text="I contributed to building the CNN model for plant disease detection, developed the ML model for fertilizer recommendation, ensuring accurate predictions and effective system performance."
+                                android:text="I contributed to building the CNN model, developed the ML model for fertilizer recommendation."
                                 android:textColor="@color/black"
                                 android:textIsSelectable="true"
                                 android:textSize="14sp" />
@@ -736,7 +736,7 @@
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="16dp"
                         android:backgroundTint="@color/colorAccent"
-                        app:cardCornerRadius="50dp"
+                        app:cardCornerRadius="25dp"
                         app:cardElevation="5dp">
 
                         <LinearLayout
@@ -793,7 +793,7 @@
                                 android:fontFamily="sans-serif"
                                 android:justificationMode="inter_word"
                                 android:lineSpacingExtra="4dp"
-                                android:text="Built a Flask API for plant disease detection, crop prediction, and fertilizer recommendation system. Also handled system architecture and presentation"
+                                android:text="Built a Flask API for plant disease detection, crop prediction, and fertilizer recommendation system."
                                 android:textColor="@color/black"
                                 android:textIsSelectable="true"
                                 android:textSize="14sp" />
@@ -850,7 +850,7 @@
                         android:visibility="invisible"
                         android:layout_marginBottom="16dp"
                         android:backgroundTint="@color/colorAccent"
-                        app:cardCornerRadius="50dp"
+                        app:cardCornerRadius="25dp"
                         app:cardElevation="5dp">
 
                         <LinearLayout
@@ -907,7 +907,7 @@
                                 android:fontFamily="sans-serif"
                                 android:justificationMode="inter_word"
                                 android:lineSpacingExtra="4dp"
-                                android:text="I primarily focused on the presentation, sequence diagram, and API development. I also contributed to the documentation and core model, but to a lesser extent."
+                                android:text="I focused on the presentation and API development. I also contributed to the documentation and core model."
                                 android:textColor="@color/black"
                                 android:textIsSelectable="true"
                                 android:textSize="14sp" />
@@ -964,7 +964,7 @@
                         android:visibility="invisible"
                         android:layout_marginBottom="16dp"
                         android:backgroundTint="@color/colorAccent"
-                        app:cardCornerRadius="50dp"
+                        app:cardCornerRadius="25dp"
                         app:cardElevation="5dp">
 
                         <LinearLayout
@@ -1021,7 +1021,7 @@
                                 android:fontFamily="sans-serif"
                                 android:justificationMode="inter_word"
                                 android:lineSpacingExtra="4dp"
-                                android:text="developing an AI model, building a fertilizer recommendation model, writing the full technical documentation, and designing the Use Case diagram to illustrate system interactions."
+                                android:text="I contributed in a fertilizer recommendation model, writing the full technical documentation."
                                 android:textColor="@color/black"
                                 android:textIsSelectable="true"
                                 android:textSize="14sp" />
@@ -1068,11 +1068,8 @@
                                 app:tint="#fff" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
-
-
                 </LinearLayout>
             </HorizontalScrollView>
         </LinearLayout>
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

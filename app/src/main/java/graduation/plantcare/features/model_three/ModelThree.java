@@ -161,7 +161,7 @@ public class ModelThree extends BaseActivity {
     public static boolean validateFields(TextInputEditText[] inputs, TextInputLayout[] layouts) {
         boolean isValid = true;
         for (int i = 0; i < inputs.length; i++) {
-            if (inputs[i].getText().toString().isEmpty()) {
+            if (inputs[i].getText().toString().isEmpty() || inputs[i].getText().toString().equals("-")) {
                 layouts[i].setErrorEnabled(true);
                 layouts[i].setError("Required!");
                 isValid = false;
@@ -227,6 +227,7 @@ public class ModelThree extends BaseActivity {
                             imageView.setImageResource(R.drawable.icon);
                         }
                         progressBar.setVisibility(View.GONE);
+                        clearFields();
                     } else {
                         try {
                             Log.e("API_ERROR", "Error: " + response.code() + " " + (response.errorBody()).string());
@@ -246,5 +247,38 @@ public class ModelThree extends BaseActivity {
                 }
             });
         }
+    }
+
+    private void clearFields() {
+        temperatureInput.setText("");
+        pHInput.setText("");
+        rainfallInput.setText("");
+        potassiumInput.setText("");
+        nitrogenInput.setText("");
+        phosphorusInput.setText("");
+
+        temperatureInput.setError(null);
+        pHInput.setError(null);
+        rainfallInput.setError(null);
+        potassiumInput.setError(null);
+        nitrogenInput.setError(null);
+        phosphorusInput.setError(null);
+
+        temperatureLayout.setError(null);
+        pHLayout.setError(null);
+        rainfallLayout.setError(null);
+        potassiumLayout.setError(null);
+        nitrogenLayout.setError(null);
+        phosphorusLayout.setError(null);
+
+        temperatureLayout.setErrorEnabled(false);
+        pHLayout.setErrorEnabled(false);
+        rainfallLayout.setErrorEnabled(false);
+        potassiumLayout.setErrorEnabled(false);
+        nitrogenLayout.setErrorEnabled(false);
+        phosphorusLayout.setErrorEnabled(false);
+
+        cropSpinner.setSelection(0);
+        soilSpinner.setSelection(0);
     }
 }

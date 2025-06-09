@@ -35,18 +35,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.12" />
 
-    <ImageButton
-        android:id="@+id/profileBackIcon"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@null"
-        android:scaleType="centerInside"
-        android:src="@drawable/left"
-        app:layout_constraintBottom_toTopOf="@+id/guideline41"
-        app:layout_constraintEnd_toStartOf="@+id/guideline42"
-        app:layout_constraintStart_toStartOf="@+id/guideline39"
-        app:layout_constraintTop_toTopOf="@+id/guideline32" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline42"
         android:layout_width="wrap_content"

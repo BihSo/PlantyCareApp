@@ -29,6 +29,9 @@
         tools:ignore="WrongManifestParent"
         tools:targetApi="31">
         <activity
+            android:name=".ui.auth.DeleteAccount"
+            android:exported="false" />
+        <activity
             android:name=".features.model_three.ModelThree"
             android:exported="false"
             android:screenOrientation="portrait"

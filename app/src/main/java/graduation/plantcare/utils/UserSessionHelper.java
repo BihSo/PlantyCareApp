@@ -139,4 +139,9 @@ public class UserSessionHelper {
         editor.putString("modelThreeScore", String.valueOf(score + 1));
         editor.apply();
     }
+
+    public void clearUserData() {
+        editor.clear();
+        editor.apply();
+    }
 }

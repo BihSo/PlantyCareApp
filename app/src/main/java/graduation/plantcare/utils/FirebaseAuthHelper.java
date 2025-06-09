@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -105,9 +107,39 @@ public class FirebaseAuthHelper {
         }
     }
 
+    public void deleteEmail(String email, String password, AuthCallbackWithoutInfo callback) {
+        AuthCredential credential = EmailAuthProvider
+                .getCredential(email, password);
+
+        firebaseAuth.getCurrentUser().reauthenticate(credential)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        firebaseAuth.getCurrentUser().delete()
+                                .addOnCompleteListener(deleteTask -> {
+                                    if (deleteTask.isSuccessful()) {
+                                        callback.onSuccess();
+                                        Log.d("DeleteUser", "User deleted after re-authentication.");
+                                    } else {
+                                        callback.onFailure();
+                                        Log.e("DeleteUser", "Deletion failed", deleteTask.getException());
+                                    }
+                                });
+                    } else {
+                        callback.onFailure();
+                        Log.e("DeleteUser", "Re-authentication failed", task.getException());
+                    }
+                });
+    }
+
     public interface AuthCallback {
         void onSuccess(FirebaseUser user);
 
         void onFailure(String errorMessage);
+    }
+
+    public interface AuthCallbackWithoutInfo{
+        void onSuccess();
+
+        void onFailure();
     }
 }

@@ -16,9 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import graduation.plantcare.R;
-import graduation.plantcare.adapters.DictionaryAdapter;
-import graduation.plantcare.adapters.FAQAdapter;
-import graduation.plantcare.ui.home.FAQItem;
+import graduation.plantcare.adapters.GlobalAdapter;
 
 public class DictionaryFragment extends Fragment {
 
@@ -45,18 +43,18 @@ public class DictionaryFragment extends Fragment {
 
         dictionaryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        List<DictionaryItem> dictionaryList = new ArrayList<>();
-        dictionaryList.add(new DictionaryItem(R.drawable.ratio_of_nitrogen, "Ratio Of Nitrogen" , "The amount of nitrogen in the soil, which helps plants grow and stay healthy (N)."));
-        dictionaryList.add(new DictionaryItem(R.drawable.ratio_of_phosphorus, "Ratio Of Phosphorus" , "The amount of phosphorus in the soil, which helps plants grow and stay healthy (P)."));
-        dictionaryList.add(new DictionaryItem(R.drawable.ratio_of_potassium, "Ratio Of Potassium" , "The amount of potassium in the soil, which helps plants grow and stay healthy (K)."));
-        dictionaryList.add(new DictionaryItem(R.drawable.temperature, "Temperature" , "How hot or cold the environment is, affecting plant growth and health."));
-        dictionaryList.add(new DictionaryItem(R.drawable.humidity_in, "Humidity In %" , "How much water vapor is in the air, shown as a percentage that affects plant growth."));
-        dictionaryList.add(new DictionaryItem(R.drawable.ph_value, "PH Value" , "Shows how acidic or alkaline the soil or water is, which affects plant health."));
-        dictionaryList.add(new DictionaryItem(R.drawable.rainfall_in_mm, "Water Rainfall" , "The amount of rain that falls, measured in millimeters, important for plant watering."));
-        dictionaryList.add(new DictionaryItem(R.drawable.select_crop_type, "Crop Type" , "Choosing the type of crop to grow based on the plant’s needs and environment."));
-        dictionaryList.add(new DictionaryItem(R.drawable.select_soil_color, "Soil Color" , "Choosing the color of the soil, which can indicate its type and nutrient content."));
+        List<ThreeComponentsItem> dictionaryList = new ArrayList<>();
+        dictionaryList.add(new ThreeComponentsItem(R.drawable.ratio_of_nitrogen, "Ratio Of Nitrogen" , "The amount of nitrogen in the soil, which helps plants grow and stay healthy (N)."));
+        dictionaryList.add(new ThreeComponentsItem(R.drawable.ratio_of_phosphorus, "Ratio Of Phosphorus" , "The amount of phosphorus in the soil, which helps plants grow and stay healthy (P)."));
+        dictionaryList.add(new ThreeComponentsItem(R.drawable.ratio_of_potassium, "Ratio Of Potassium" , "The amount of potassium in the soil, which helps plants grow and stay healthy (K)."));
+        dictionaryList.add(new ThreeComponentsItem(R.drawable.temperature, "Temperature" , "How hot or cold the environment is, affecting plant growth and health."));
+        dictionaryList.add(new ThreeComponentsItem(R.drawable.humidity_in, "Humidity In %" , "How much water vapor is in the air, shown as a percentage that affects plant growth."));
+        dictionaryList.add(new ThreeComponentsItem(R.drawable.ph_value, "PH Value" , "Shows how acidic or alkaline the soil or water is, which affects plant health."));
+        dictionaryList.add(new ThreeComponentsItem(R.drawable.rainfall_in_mm, "Water Rainfall" , "The amount of rain that falls, measured in millimeters, important for plant watering."));
+        dictionaryList.add(new ThreeComponentsItem(R.drawable.select_crop_type, "Crop Type" , "Choosing the type of crop to grow based on the plant’s needs and environment."));
+        dictionaryList.add(new ThreeComponentsItem(R.drawable.select_soil_color, "Soil Color" , "Choosing the color of the soil, which can indicate its type and nutrient content."));
 
-        DictionaryAdapter adapter = new DictionaryAdapter(getContext(),dictionaryList);
+        GlobalAdapter adapter = new GlobalAdapter(getContext(),dictionaryList);
         dictionaryRecyclerView.setAdapter(adapter);
     }
 }

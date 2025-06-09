@@ -279,7 +279,7 @@ public class HomeFragment extends Fragment implements OnScanResultChangedListene
                 } else {
                     String firstName = snapshot.child("firstName").getValue(String.class);
                     String lastName = snapshot.child("lastName").getValue(String.class);
-                    UserSessionHelper userSessionHelper = UserSessionHelper.getInstance(requireContext());
+                    UserSessionHelper userSessionHelper = UserSessionHelper.getInstance(getContext());
                     userSessionHelper.setName(firstName,lastName);
                     homeGreetingMessage.setText("Hi, " + firstName + " 🔥");
                 }

@@ -84,21 +84,28 @@ public class ProfileFragment extends Fragment {
         scanProgress.setMax(maxScore);
         cropProgress.setMax(maxScore);
         fertilizerProgress.setMax(maxScore);
+
         scanProgress.setProgress(modelOneScore);
         cropProgress.setProgress(modelTwoScore);
         fertilizerProgress.setProgress(modelThreeScore);
-
-        scanPercentage.setText(String.format("%.1f", modelOneScore / (float) maxScore * 100) + "%");
-        cropPercentage.setText(String.format("%.1f", modelTwoScore / (float) maxScore * 100) + "%");
-        fertilizerPercentage.setText(String.format("%.1f", modelThreeScore / (float) maxScore * 100) + "%");
 
         scanNumber.setText(String.valueOf(modelOneScore));
         cropNumber.setText(String.valueOf(modelTwoScore));
         fertilizerNumber.setText(String.valueOf(modelThreeScore));
 
-        setProgressBarAnimation(scanProgress, modelOneScore, 1000);
-        setProgressBarAnimation(cropProgress, modelTwoScore, 1000);
-        setProgressBarAnimation(fertilizerProgress, modelThreeScore, 1000);
+        if (maxScore != 0 ){
+            scanPercentage.setText(String.format("%.1f", modelOneScore / (float) maxScore * 100) + "%");
+            cropPercentage.setText(String.format("%.1f", modelTwoScore / (float) maxScore * 100) + "%");
+            fertilizerPercentage.setText(String.format("%.1f", modelThreeScore / (float) maxScore * 100) + "%");
+
+            setProgressBarAnimation(scanProgress, modelOneScore, 1000);
+            setProgressBarAnimation(cropProgress, modelTwoScore, 1000);
+            setProgressBarAnimation(fertilizerProgress, modelThreeScore, 1000);
+        } else {
+            scanPercentage.setText("0%");
+            cropPercentage.setText("0%");
+            fertilizerPercentage.setText("0%");
+        }
     }
 
     public void setProgressBarAnimation(ProgressBar progressBar, int score, int duration) {
