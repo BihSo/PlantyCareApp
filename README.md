@@ -115,7 +115,7 @@ The app includes a bottom bar with 4 navigation items:
 - ✏️ Edit Profile  
 - ℹ️ About Us  
 - ❓ FAQs  
-- 🔒 Privacy Policy  
+- 🔒 Privacy Policy 
 - 📞 Contact Us  
 - ⭐ Rate Us  
 - 📤 Share the App  
